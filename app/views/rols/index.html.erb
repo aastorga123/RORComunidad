@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lista de Roles</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nombrerol</th>
+      <th>Descripcionrol</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rols.each do |rol| %>
+      <tr>
+        <td><%= rol.nombrerol %></td>
+        <td><%= rol.descripcionrol %></td>
+        <td><%= link_to 'Detalle', rol %></td>
+        <td><%= link_to 'Editar', edit_rol_path(rol) %></td>
+        <td><%= link_to 'Eliminar', rol, method: :delete, data: { confirm: 'Estas seguro de eliminar este rol?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Rol', new_rol_path %>

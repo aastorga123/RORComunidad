@@ -1,0 +1,101 @@
+<%= form_for(@unidad) do |f| %>
+  <% if @unidad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@unidad.errors.count, "error") %> prohibited this unidad from being saved:</h2>
+
+      <ul>
+      <% @unidad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :numero_unidad %><br>
+    <%= f.number_field :numero_unidad %>
+  </div>
+  <div class="field">
+    <%= f.label :calle_interna %><br>
+    <%= f.text_field :calle_interna %>
+  </div>
+  <div class="field">
+    <%= f.label :ubicacion_id %><br>
+    <!--<%= f.text_field :ubicacion_id %>-->
+    
+    <%= f.select("ubicacion_id", Ubicacion.all.collect{|u| [u.nombreubicacion, u.id]},{include_blank: 'Seleccione una ubicacion...'}) %>
+  </div>
+  
+  <div class="field">
+    <label>Tipo: </label><label id="respuesta"></label>
+  </div>
+  
+  <div class="field">
+    <%= f.label :categoria_id %><br>
+    <!--<%= f.text_field :categoria_id %>-->
+    	    <%= f.select("categoria_id", Categorium.all.collect{|c| [c.nombre_categoria, c.id]},{include_blank: 'Seleccione una categoria...'}, :disabled => true) %>
+  </div>
+  
+<!--  <div class="field">
+    <select id="options" onchange="<%= remote_function(:update => "options",
+    :url => { :action => :update_options }) %>">
+  <option value="0">Hello</option>
+  <option value="1">World</option>
+</select>
+  </div>-->
+  
+  <div class="actions">
+    <%= f.submit "Crear"%>
+  </div>
+  
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#unidad_ubicacion_id").change(function (e) {
+    var value = this.value;
+
+    if(value == "")
+    {
+      $( "#unidad_categoria_id" ).prop( "disabled", true );
+      $("#respuesta").html("");
+    }
+    else
+    {
+      var ubicacion_id = parseInt(value);
+
+    $.ajax({
+    type: "GET",
+    url: "/unidads/buscarubicacion/" + ubicacion_id,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    cache: false, 
+    processData: false,
+    success: function(data) {
+          var tipo = data;
+           $("#respuesta").html(tipo);
+            var select = document.getElementById('unidad_categoria_id');
+            var options = select.getElementsByTagName('option');
+            if (tipo == 'edificio')
+            {
+                for(var i=0; i<options.length; i++) 
+                {
+                    if(options[i].innerHTML == 'Casas') 
+                    {
+                      select.options[options[i].value].disabled = true;
+                    }
+                }
+            }
+    },
+    error: function(error){
+            console.log(error);
+           $("#respuesta").html("Error al intentar buscar la ubicacion.");
+    }
+    });
+      $( "#unidad_categoria_id" ).prop( "disabled", false );
+    }
+});
+});
+</script>
+
+<% end %>
+
+

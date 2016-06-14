@@ -8,51 +8,39 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<%inicio_index_path%>">Brand</a>
+      <a class="navbar-brand" href="<%inicio_index_path%>">Mi Comunidad</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        
-      
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+          <% if usuario_signed_in?%>
+            <% if can? :all, Usuario %>
+            <li><a href="<%= new_usuario_registration_path %>">Usuario</a></li>
+            <% end %>
+            <% if can? :read, Cliente %>
+            <li><a href="<%= clientes_path %>">Cliente</a></li>
+            <% end %>
+            <li><a href="<%= ubicacions_path %>">Ubicacion</a></li>
+            <li><a href="<%= unidads_path %>">Unidad</a></li>
+          <% end%>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Producto</a></li>
-         <li><a href="#">Pedido</a></li>
-        <% if user_signed_in?%>
+        
+        <% if usuario_signed_in?%>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email%> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_usuario.email%> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li><a href="<%=edit_user_registration_path %>">log out</a></li>
+            
+            <li><a href="<%=edit_usuario_registration_path %>"><span class="glyphicon glyphicon-edit"></span> Editar Usuario</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<%=destroy_user_session_path %>" data-method="delete">log out</a></li>
+            <li><a href="<%=destroy_usuario_session_path %>" data-method="delete"><span class="glyphicon glyphicon-log-out"> Cerrar Sesión</a></li>
           </ul>
         </li>
         <% else%>
-        <li><a href="<%=new_user_session_path %>">logIN</a></li>
+        <li><a href="<%=new_usuario_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+      
         <% end%>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -1,0 +1,30 @@
+<%= form_for(@banco) do |f| %>
+  <% if @banco.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@banco.errors.count, "error") %> prohibited this banco from being saved:</h2>
+
+      <ul>
+      <% @banco.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nro_cuenta %><br>
+    <%= f.text_field :nro_cuenta %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre_banco %><br>
+    <%= f.text_field :nombre_banco %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_cuenta_id %><br>
+    <!--<%= f.text_field :tipo_cuenta_id %>-->
+    <%= f.select("tipo_cuenta_id", TipoCuentum.all.collect{|c| [c.tipo, c.id]},{include_blank: 'Seleccione un tipo...'}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Usuario Rols</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Rol</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuario_rols.each do |usuario_rol| %>
+      <tr>
+        <td><%= usuario_rol.usuario %></td>
+        <td><%= usuario_rol.rol %></td>
+        <td><%= link_to 'Show', usuario_rol %></td>
+        <td><%= link_to 'Edit', edit_usuario_rol_path(usuario_rol) %></td>
+        <td><%= link_to 'Destroy', usuario_rol, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuario rol', new_usuario_rol_path %>

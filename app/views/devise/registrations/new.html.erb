@@ -1,0 +1,167 @@
+<h2>Crear Usuario</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :post,class: 'form-horizontal'}) do |f| %>
+
+<% if devise_error_messages! != "" %>
+<div class="alert alert-danger">
+  <strong>Error!</strong> <%= devise_error_messages! %>
+</div>
+<% end %>
+
+<div class="form-group">
+    <%= f.label :email, "correo", class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.email_field :email, class: "form-control" %>
+    </div>
+</div>
+<!--
+<div class="form-group">
+    <%= f.label :password, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+</div>
+
+<div class="form-group">
+    <%= f.label :password_confirmation, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
+</div>
+-->
+<div class="form-group">
+    <%= f.label :perfil_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.select("perfil_id", Perfil.all.collect{|p| [p.nombreperfil, p.id]},{include_blank: 'Seleccione un perfil...'},class: "form-control") %>
+    </div>
+</div>
+
+<!--
+<div class="form-group">
+     <%= f.label :rol_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.select("id", Rol.all.collect{|r| [r.nombrerol, r.id]},{include_blank: 'Seleccione un rol...'},class: "form-control") %>
+    </div>
+</div>
+-->
+
+<div class="form-group">
+    <%= f.label :rol_id, class: "col-sm-2 control-label" %>
+
+    <div class="col-sm-6">
+  <%= hidden_field_tag "roles[]", nil %>
+  <% for rol in @listado_rol %>
+        
+    <%= check_box_tag "roles[]", rol.id %>
+    <%= rol.nombrerol %></br>
+
+  <% end %>
+  </div>
+
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+        <%= f.submit "Agregar", class: "btn btn-primary" %>
+    </div>
+</div>
+<!--
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+        <%= render "devise/shared/links" %>
+    </div>
+</div>
+-->
+<% end %>
+
+<script type="text/javascript">
+/*
+$(document).ready(function() {
+  $("#usuario_perfil_id").change(function (e) {
+    var value = this.value;
+
+    if(value == "")
+    {
+      $( "#usuario_id" ).prop( "disabled", false );
+      document.getElementById('usuario_id').selectedIndex = 0;
+      //$("#respuesta").html("");
+    }
+    else
+    {
+      var perfil_id = parseInt(value);
+
+    $.ajax({
+    type: "GET",
+    url: "/application/buscar_rol/" + perfil_id,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    cache: false, 
+    processData: false,
+    success: function(data) {
+           var rol = data;
+            //$("#respuesta").html(rol);
+            var select = document.getElementById('usuario_id');
+            var options = select.getElementsByTagName('option');
+            
+            if (rol != null)
+            {
+            if (rol.nombrerol == 'ADM SISTEMA')
+            {
+                for(var i=0; i<options.length; i++) 
+                {
+                    for(var i=1; i<options.length; i++) 
+                    {
+                        if(options[i].innerHTML != 'ADM SISTEMA') 
+                            {
+                       
+                                select.options[options[i].value].disabled = true;
+                            }
+                            else{
+                                select.options[options[i].value].disabled = false;
+                            }
+                    }
+                    document.getElementById('usuario_id').selectedIndex = 4;
+                    
+                }
+            }
+            if (rol.nombrerol == 'ADM COMUNIDAD')
+            {
+                
+                for(var i=1; i<options.length; i++) 
+                {
+                    if(options[i].innerHTML != 'ADM COMUNIDAD') 
+                    {
+                       
+                        select.options[options[i].value].disabled = true;
+                    }
+                    else{
+                                select.options[options[i].value].disabled = false;
+                            }
+                }
+                document.getElementById('usuario_id').selectedIndex = 5;
+                //$( "#usuario_id" ).prop( "disabled", true );
+            }
+            }
+            else
+            {
+                for(var i=1; i<options.length; i++) 
+                {
+                    select.options[options[i].value].disabled = false;
+                }
+                document.getElementById('usuario_id').selectedIndex = 0;
+                select.options[options[4].value].disabled = true;
+                select.options[options[5].value].disabled = true;
+            }
+    },
+    error: function(error){
+            console.log(error);
+           $("#respuesta").html("Error al intentar buscar la ubicacion.");
+    }
+    });
+      $( "#usuario_id" ).prop( "disabled", false );
+    }
+});
+});
+*/
+</script>

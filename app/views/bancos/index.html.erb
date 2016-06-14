@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lista Bancos</h1>
+
+<%= paginate(@bancos) %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nro cuenta</th>
+      <th>Nombre banco</th>
+      <th>Tipo cuenta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bancos.each do |banco| %>
+      <tr>
+        <td><%= banco.nro_cuenta %></td>
+        <td><%= banco.nombre_banco %></td>
+        <td><%= TipoCuentum.find(banco.tipo_cuenta_id).tipo %></td>
+        <td><%= link_to 'Show', banco %></td>
+        <td><%= link_to 'Edit', edit_banco_path(banco) %></td>
+        <td><%= link_to 'Destroy', banco, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Banco', new_banco_path %>

@@ -1,0 +1,54 @@
+
+<p>
+  <strong>Rut:</strong>
+  <%= @cliente.rut %>
+</p>
+
+<p>
+  <strong>Razon social:</strong>
+  <%= @cliente.razon_social %>
+</p>
+
+<p>
+  <strong>Nemo:</strong>
+  <%= @cliente.nemo %>
+</p>
+
+<p>
+  <strong>Direccion cliente:</strong>
+  <%= @cliente.direccion_cliente %>
+</p>
+
+<p>
+  <strong>Email cliente:</strong>
+  <%= @cliente.email_cliente %>
+</p>
+
+<p>
+  <strong>Telefono clinte:</strong>
+  <%= @cliente.telefono_cliente %>
+</p>
+
+<p>
+  <strong>Representante legal:</strong>
+  <%= @cliente.representante_legal %>
+</p>
+
+<p>
+  <strong>Logo:</strong>
+  <!--<%= @cliente.logo %>-->
+  <%= image_tag(@cliente.logo_url, :width => 170, :height => 100) if @cliente.logo.present? %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= current_usuario.email %>
+</p>
+
+<!--<p>
+  <strong>Banco:</strong>
+  <%= @cliente.banco %>
+</p>-->
+
+<%= link_to 'Edit', edit_cliente_path(@cliente) %> |
+<%= link_to 'Back', clientes_path %>

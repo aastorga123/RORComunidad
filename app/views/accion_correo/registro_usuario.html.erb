@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Bienvenido a  MiComunidad, <%= @user.email %></h1>
+    <p>
+      
+      Usted se encuentra registrado con éxito.<br>
+      
+      Su contraseña es: <%= @password %>.<br>
+    </p>
+    <p>
+      Para acceder al sitio , sólo tienes que seguir este enlace: <%= @url %>.
+    </p>
+    <p>Gracias por unirse.</p>
+  </body>
+</html>

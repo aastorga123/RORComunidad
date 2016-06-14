@@ -1,0 +1,48 @@
+
+
+<h1>Listado de Clientes</h1>
+
+<%= paginate(@clientes) %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Rut</th>
+      <th>Razon social</th>
+      <th>Nemo</th>
+      <th>Direccion</th>
+      <th>Email</th>
+      <th>Telefono</th>
+      <th>Representante legal</th>
+      <th>Logo</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clientes.each do |cliente| %>
+      <tr>
+        <td><%= cliente.rut %></td>
+        <td><%= cliente.razon_social %></td>
+        <td><%= cliente.nemo %></td>
+        <td><%= cliente.direccion_cliente %></td>
+        <td><%= cliente.email_cliente %></td>
+        <td><%= cliente.telefono_cliente %></td>
+        <td><%= cliente.representante_legal %></td>
+        <!--<td><%= cliente.logo %></td>-->
+        <td><%= image_tag(cliente.logo_url, :width => 60, :height => 55) if cliente.logo.present? %></td>
+        <!--<td><%= cliente.usuario %></td>
+        <td><%= cliente.banco %></td>-->
+        <td><%= link_to 'Detalle', cliente %></td>
+        <td><%= link_to 'Editar', edit_cliente_path(cliente) %></td>
+        <% if can? :destroy, cliente %>
+        <td><%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: '¿Estas seguro de eliminar este cliente?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate(@clientes) %>
+
+<br>
+
+<%= link_to 'Nuevo Cliente', new_cliente_path %>

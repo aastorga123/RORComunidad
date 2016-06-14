@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nro_cuenta: MyString
+  nombre_banco: MyString
+  tipo_cuenta_id: 
+
+two:
+  nro_cuenta: MyString
+  nombre_banco: MyString
+  tipo_cuenta_id: 

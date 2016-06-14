@@ -1,0 +1,24 @@
+
+
+<p>
+  <strong>Numero unidad:</strong>
+  <%= @unidad.numero_unidad %>
+</p>
+
+<p>
+  <strong>Calle interna:</strong>
+  <%= @unidad.calle_interna %>
+</p>
+
+<p>
+  <strong>Ubicacion:</strong>
+  <%= Ubicacion.find(@unidad.ubicacion_id).nombreubicacion %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= Categorium.find(@unidad.categoria_id).nombre_categoria %>
+</p>
+
+<%= link_to 'Edit', edit_unidad_path(@unidad) %> |
+<%= link_to 'Back', unidads_path %>

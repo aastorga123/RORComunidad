@@ -1,0 +1,23 @@
+
+<p>
+  <strong>Nombreubicacion:</strong>
+  <%= @ubicacion.nombreubicacion %>
+</p>
+
+<p>
+  <strong>Direccion ubicacion:</strong>
+  <%= @ubicacion.direccion_ubicacion %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @ubicacion.tipo %>
+</p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= Cliente.find(@ubicacion.cliente_id).rut %>
+</p>
+
+<%= link_to 'Edit', edit_ubicacion_path(@ubicacion) %> |
+<%= link_to 'Back', ubicacions_path %>
